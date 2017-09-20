@@ -25,15 +25,15 @@ if [ "$hlp" = "yes" -o $# -lt 1 ]; then
   exit 0
 fi
 ### Set the variables ####
-url=https://egovservices.dnrd.ae/dnrdmedservices/GetPersonInfoWithPhotoEx.asmx
+url="Place the WSDL Link here"
 header1='Content-Type:text/xml;charset=utf-8'
-action='http://tempuri.org/Execute'
-value=$(</root/request.xml)
+action='"Place the action used for the SOAP Request here e.g http://your_website/Execute"'
+value=$("Place your XML File Path here")
 
 
 ### Run the Curl command with the XML and check time before and after ####
 res1=$(date +%s.%N)
-curl -s -k -H "$header1" -H "SOAPAction:$action" -d@/root/request.xml $url -o /root/output.txt
+curl -s -k -H "$header1" -H "SOAPAction:$action" -d@"Place your XML file Path here" $url -o /root/output.txt
 res2=$(date +%s.%N)
 
 ### Subtracting the time before and after, then convert to days, hours, minutes and seconds #####
@@ -69,29 +69,29 @@ if [ -n "$warn" -a -n "$crit" ]; then
   if (( $err == 0 )); then
 
     if [ "$perform" = "yes" ]; then
-      echo  "DNRD OK: $OUTPUTP "
+      echo  "CHECK OK: $OUTPUTP "
       exit "$err"
     else
-      echo  "DNRD OK: $OUTPUT "
+      echo  "CHECK OK: $OUTPUT "
       exit "$err"
     fi
 
   elif (( $err == 1 )); then
     if [ "$perform" = "yes" ]; then
-      echo  "DNRD WARNING: $OUTPUTP "
+      echo  "CHECK WARNING: $OUTPUTP "
       exit "$err"
     else
-      echo  "DNRD WARNING: $OUTOUT "
+      echo  "CHECK WARNING: $OUTOUT "
       exit "$err"
     fi
 
   elif (( $err == 2 )); then
 
     if [ "$perform" = "yes" ]; then
-      echo "DNRD CRITICAL: $OUTPUTP "
+      echo "CHECK CRITICAL: $OUTPUTP "
       exit "$err"
     else
-      echo "DNRD CRITICAL: $OUTPUT "
+      echo "CHECK CRITICAL: $OUTPUT "
       exit "$err"
     fi
 
